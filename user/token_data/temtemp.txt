@@ -1,0 +1,1 @@
+/root/project/bin/boinc2docker_create_work.py 2xktxjef7bkdhc:030c674197 /bin/bash -c  "cd /work; bash  job_creator.sh; python3  DCD.py; python3 /Mov_Specific.py"
