@@ -1,0 +1,6 @@
+
+AuthName "${project}"
+AuthType Basic
+AuthUserFile /root/project//html/ops/.htpasswd
+require valid-user
+

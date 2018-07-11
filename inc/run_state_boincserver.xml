@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<boinc>
+    <tasks>
+        <task>
+            <cmd>antique_file_deleter -d 2</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+        <task>
+            <cmd>run_in_ops ./update_uotd.php</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+        <task>
+            <cmd>run_in_ops ./update_forum_activities.php</cmd>
+            <prunable>False</prunable>
+            <last_run>1529618101</last_run>
+        </task>
+        <task>
+            <cmd>update_stats</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+        <task>
+            <cmd>run_in_ops ./update_profile_pages.php</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+        <task>
+            <cmd>run_in_ops ./notify.php</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+        <task>
+            <cmd>run_in_ops ./badge_assign.php</cmd>
+            <prunable>False</prunable>
+            <last_run>1529608201</last_run>
+        </task>
+    </tasks>
+    <enabled>1</enabled>
+</boinc>
+
