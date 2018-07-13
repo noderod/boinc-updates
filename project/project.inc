@@ -12,8 +12,8 @@ require_once("../inc/util.inc");
 
 //-------------- Project name and owner
 
-define("PROJECT", "REPLACE WITH PROJECT NAME");
-define("COPYRIGHT_HOLDER", "REPLACE WITH COPYRIGHT HOLDER");
+define("PROJECT", "TACC-2-BOINC");//"REPLACE WITH PROJECT NAME"
+define("COPYRIGHT_HOLDER", "University of Texas at Austin, All Rights Reserved.");//Second Argument: "REPLACE WITH COPYRIGHT HOLDER"
 
 //-------------- URLs and directories
 
@@ -109,13 +109,102 @@ function make_php_mailer() {
 // if you need to open divs here close them in project_footer()
 //
 function project_banner($title, $prefix, $is_main) {
-    if ($is_main) {
-        echo '<img class="img-responsive" src="img/water.jpg">';
+	echo '<a href="https://boinc.berkeley.edu/">
+		<img class="img-responsive" style="width: 208px; margin-bottom: 23px;" src="./img1/boincLogo.jpg" alt="Boinc Logo">
+	      </a>	
+	      <a href="https://www.tacc.utexas.edu/">
+		<img class="img-responsive" style="width: 208px; position: absolute; top: 9px; right: 15px;" src="./img1/taccLogo.png" alt="Boinc Logo">
+	      </a>
+					';
+    sample_navbar(secure_url_base(), get_logged_in_user(false), false);
+    if ($title) {
+        echo "<h2>$title</h2>\n";
+        /*
+        New line character causes space between nav-bar and the image below it.
+        */
     }
+    /*
+    Means of creating the two columns
+    https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_two_columns
+    Adding a dividing border between the columns
+    https://stackoverflow.com/questions/3313456/css-borders-between-table-columns-only
+    */
+    if ($is_main) {
+      echo '<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    border-right: solid;
+}
+.column:last-child
+{
+    border-right: none;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    width: 100%;
+}
+.footer
+{
+    overflow: hidden;
+}
+</style>';
+        echo '<div style="position: absolute; z-index: 1; top: 29%;left: 12%;right: 12%;text-align: center;font-weight:bold;font-size: 60px;
+  color: white;">
+			Welcome to TACC-2-BOINC!
+		</div>
+		<!-- Small Summary about Boinc -->
+		<div class="container-fluid" style="position: absolute;
+  z-index: 1;
+  top: 43%;
+  left: 5%;
+  right: 5%;
+  text-align: left;
+  font-weight:bold;
+  font-size: 1.2em;
+  background-color: white;
+  <!--opacity: 0.75; Commented out for solid white box-->
+  filter: alpha(opacity=50);
+  padding: 1em;
+  border-radius: 25px;">
+      <div class="row">
+			<div style="color: black;" class="column">			BOINC is an open-source software platform for volunteer computing.
+			BOINC has a client-server architecture. Once a BOINC client is downloaded on a device
+			(desktop, laptop, phone, and a tablet) owned by a 
+<a data-toggle="tooltip"  style="border-bottom: 1px dotted #000;text-decoration: none;" title="Those interested in supporting R&D activities of researchers and scholars using TACC resources are invited to join the TACC-2-BOINC project as volunteers and the job for volunteers are to donate their spare compute-cycles to the TACC-2-BOINC projects.">volunteer</a>,
+			the BOINC server starts sending computational tasks to the client when it is plugged in to the power supply
+			and is available to accept tasks. Upon the completion of the tasks,
+			the results are gathered from the clients participating in the computations,
+			and are uploaded to the BOINC server, from where they are then forwarded to the <a data-toggle="tooltip"  style="border-bottom:1px dotted #000;text-decoration: none;" title="All active users of TACC resources are eligible to run jobs through the TACC-2-BOINC infrastructure and qualify as researchers.">users/researchers</a>.</div>
+			<div style="color: black;" class="column">The TACC-2-BOINC project brings the power of volunteer computing to the <a data-toggle="tooltip"  style="border-bottom:1px dotted #000;text-decoration: none;" title="All active users of TACC resources are eligible to run jobs through the TACC-2-BOINC infrastructure and qualify as researchers.">users/researchers</a> using TACC resources.
+			By taking advantage of the computing cycles donated by the <a data-toggle="tooltip"  style="border-bottom: 1px dotted #000;text-decoration: none;" title="Those interested in supporting R&D activities of researchers and scholars using TACC resources are invited to join the TACC-2-BOINC project as volunteers and the job for volunteers are to donate their spare compute-cycles to the TACC-2-BOINC projects.">volunteer</a>,
+			<a data-toggle="tooltip"  style="border-bottom:1px dotted #000;text-decoration: none;" title="All active users of TACC resources are eligible to run jobs through the TACC-2-BOINC infrastructure and qualify as researchers.">users/researchers</a> can supplement the compute cycles granted to them as part of the TACC/XSEDE allocation process.
+      </div>
+      </div>
+		</div><img class="img-responsive" style="height: 500px;width: 100%;" src="img/stampede.jpg">';//water.jpg was a placeholder
+    }
+    /*
+    https://upload.wikimedia.org/wikipedia/commons/1/14/Coyote_closeup.jpg
+    Image recovered from Wikipedia Commons.
+    Labeled for reuse.
+    Previous image was img/water.jpg
+    */
+    /*
+    This nav-bar was originally below the image:
     sample_navbar(secure_url_base(), get_logged_in_user(false), false);
     if ($title) {
         echo "<h2>$title</h2>\n";
     }
+    */
 }
 //$fixed_navbar = true;
 
@@ -123,20 +212,35 @@ function project_footer($show_return, $show_date, $prefix) {
     // If you include any links, prepend URL with $prefix
     //
     //TACC Logo Edit
-    echo '<p></p>
-    <div style= "width: 304px; height: 63px; padding: 5px; background-color: #047ef6; color: #047ef6">
-        <a class="brand boinc-logo" href="https://boinc.berkeley.edu/"><img align="middle" border="0" src="'.secure_url_base().'img/pb_boinc.gif" alt="Powered by BOINC"></a>
-<img class="center" src="https://www.tacc.utexas.edu/tacc-new-theme/images/logo.svg" width="180" height="40" alt="TACC Logo" background-color=#73b2f22></img>
-</div>
-
-        <br>
-        <p class="text-center"> &copy;'.gmdate("Y ").COPYRIGHT_HOLDER.'</p>
+    echo '
+        <footer style="position:relative; margin-left: -15px; margin-right: -15px; bottom: 0;left:0; right:0; background-color: #174b63; padding: 10px; text-align:center; color:#fff;">
+        <div class="container-fluid">
+                        <span style="font-size:20px; font-weight:bold;"> This project has been generously funded by the National
+ Science Foundation (NSF) Award #1664022.
+                <a href="https://www.nsf.gov/">
+                                                <img class="nsfLogo" src="./img1/nsf.jpg" width="65" height="65" alt="NSF Logo">
+                                        </a>
+                        </span>
+                <div class="container-fluid">
+                <span> &copy;'.gmdate("Y ").COPYRIGHT_HOLDER.'</span>
+                </div>
+        </div>
+        </footer>
     ';
     /*
     Original code for the logos of TACC and BOINC
     <a class="brand boinc-logo" href="https://boinc.berkeley.edu/"><img align="middle" border="0" src="'.secure_url_base().'img/pb_boinc.gif" alt="Powered by BOINC"></a>
         <div style= "width: 210px; height: 80px; padding: 9px; background-color: #047ef6; color: #047ef6">
 <img class="center" src="https://www.tacc.utexas.edu/tacc-new-theme/images/logo.svg" width="200" height="55" alt="TACC Logo" background-color=#73b2f22>
+</div>
+    */
+    
+    /*
+    Updated version of the code:
+    <div style= "width: 304px; height: 63px; padding: 5px; background-color: #047ef6; color: #047ef6">
+        <a class="brand boinc-logo" href="https://boinc.berkeley.edu/"><img align="middle" border="0" src="'.secure_url_base().'img/pb_boinc.gif" alt="Powered by BOINC"></a>
+<img class="center" src="https://www.tacc.utexas.edu/tacc-new-theme/images/logo.svg" width="180" height="40" alt="TACC Logo" background-color=#73b2f22></img>
+
 </div>
     */
     if ($show_date) {
